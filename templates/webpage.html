@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+     <script type="text/javascript">
+    $(function() {
+      $('a#printpriv').bind('click', function() {
+        $.getJSON('/rolesprivquery', {}, function(data) {
+          $("#result1").text(data.result);
+        });
+        return false;
+      });
+    });
+    $(function() {
+      $('a#createtable').bind('click', function() {
+        $.getJSON('/createtable', {}, function(data) {
+          $("#result").text(data.result);
+        });
+        return false;
+      });
+    });
+    $(function() {
+      $('a#delete').bind('click', function() {
+        $.getJSON('/deletedata', {}, function(data) {
+          $("#result").text(data.result);
+        });
+        return false;
+      });
+    });
+    </script>
+        <link rel="stylesheet" type="text/css" href="starter-template.css">
+
+       <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+
+        table{ table-layout:fixed; word-break: break-all; }
+        table td{overflow:hidden; width:100px;}
+        table td input[type=submit]{width: 82%;}
+        p {font-weight: bold;}
+
+    </style>
+    <title>DB PROJECT 2</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Database</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <form class="navbar-form navbar-right">
+                     <label style="color:white;">Nishanth Anandaram</label>
+          </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+        <div class="jumbotron">
+
+      <div class="starter-template">
+        <h1>Database Project 2 webapp</h1>
+        <p class="lead">This is the project for Database class done by <strong>Nishanth Anandaram</strong>.</p>
+      </div>
+
+    </div>
+
+    <div class="container pages">
+
+        <div class="row">
+        <div class="col-md-5">
+          <form action="/newuser" method="post">
+              <p>Transaction 1. Enter New account details</p>
+              <table class="table">
+              <tr>
+                <td>ID_NUM </td><td><input type="text" name="idnum" placeholder="Enter User Name" required></td>
+              </tr>
+              <tr>
+                <td>USER_ACCOUNT_NAME </td><td><input type="text" name="acname" placeholder="Enter Account name " required></td>
+              </tr>
+              <tr>
+                <td>PHONE_NUMBER </td><td><input type="text" name="phone" placeholder="Enter phone num" required></td>
+              </tr>
+              <tr>
+                <td>ROLE_NAME </td><td><input type="text" name="rolename" placeholder="Enter role name" required></td>
+              </tr>
+                  <tr>
+                <td></td><td><input type='submit' name='addnewusr' value='Add User' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+        <div class="row">
+        <div class="col-md-5">
+          <form action="/addnewrole" method="post">
+              <p>Transaction 2. Enter New Role Details</p>
+              <table class="table">
+              <tr>
+                <td>ROLE_NAME </td><td><input type="text" name="rolename" placeholder="Enter role name" required></td>
+              </tr>
+             <tr>
+                <td>Description </td><td><input type="text" name="desc" placeholder="Enter Description" required></td>
+              </tr>
+                  <tr>
+                <td></td><td><input type='submit' name='addnewrole' value='Add Role' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+    <div class="row">
+        <div class="col-md-5">
+          <form action="/addnewtable" method="post">
+              <p>Transaction 3. Enter New Table Details</p>
+              <table class="table">
+              <tr>
+                <td>TABLE_NAME </td><td><input type="text" name="tablename" placeholder="Enter Table name" required></td>
+              </tr>
+             <tr>
+                <td>Account ID_NUM of Table owner </td><td><input type="text" name="owner" placeholder="Enter ID_NUM lie 1,2.." required></td>
+              </tr>
+              <tr>
+                <td></td><td><input type='submit' name='addnewtable' value='Add Table' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+       <div class="row">
+        <div class="col-md-5">
+          <form action="/addnewprivilege" method="post">
+              <p>Transaction 4. Enter New Privilege</p>
+              <table class="table">
+              <tr>
+                <td>PRIVILEGE_NAME</td><td><input type="text" name="privname" placeholder="Privilege Name" required></td>
+              </tr>
+             <tr>
+                <td>PRIVILEGE_TYPE</td><td><input type="text" name="privtype" placeholder="ACCOUNT or RELATIONAL" required></td>
+              </tr>
+              <tr>
+                <td></td><td><input type='submit' name='addnewprivilege' value='Add Privilege' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+
+    <div class="row">
+        <div class="col-md-5">
+          <form action="/roleaccount" method="post">
+              <p>Transaction 5. Relate User Account to Role</p>
+              <table class="table">
+              <tr>
+                <td>Account ID_NUM</td><td><input type="text" name="acidnum" placeholder="Account ID" required></td>
+              </tr>
+             <tr>
+                <td>ROLE_NAME</td><td><input type="text" name="rolename" placeholder="Role Name" required></td>
+              </tr>
+              <tr>
+                <td></td><td><input type='submit' name='roleaccount' value='Relate Tables' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+
+   <div class="row">
+        <div class="col-md-5">
+          <form action="/privaccount" method="post">
+              <p>Transaction 6. Relate Role to Account Privilege</p>
+              <table class="table">
+              <tr>
+                <td>ROLE_NAME</td><td><input type="text" name="rolename" placeholder="Role Name" required></td>
+              </tr>
+             <tr>
+                <td>PRIVILEGE_NAME</td><td><input type="text" name="privname" placeholder="Priv Name" required></td>
+              </tr>
+              <tr>
+                <td>PRIVILEGE_TYPE</td><td><input type="text" name="privtype" placeholder="Priv Type" required></td>
+              </tr>
+              <tr>
+                <td></td><td><input type='submit' name='privaccount' value='Relate Tables' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+       <div class="row">
+        <div class="col-md-5">
+          <form action="/ternary" method="post">
+              <p>Transaction 7. Relate Role, Table and  Privilege</p>
+              <table class="table">
+              <tr>
+                <td>ROLE_NAME</td><td><input type="text" name="rolename" placeholder="Role Name" required></td>
+              </tr>
+             <tr>
+                <td>TABLE_NAME</td><td><input type="text" name="tablename" placeholder="Table Name" required></td>
+              </tr>
+             <tr>
+                <td>PRIVILEGE_NAME</td><td><input type="text" name="privname" placeholder="Priv Name" required></td>
+              </tr>
+              <tr>
+                <td>PRIVILEGE_TYPE</td><td><input type="text" name="privtype" placeholder="Priv Type" required></td>
+              </tr>
+              <tr>
+                <td></td><td><input type='submit' name='ternary' value='Relate Role Tables' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+
+        <div class="row">
+        <div class="col-md-5">
+          <form action="/rolesprivquery" method="post">
+              <p>Transaction 8. Print all the privileges related to a role</p>
+              <table class="table">
+              <tr>
+                <td>ROLE_NAME</td><td><input type="text"  id='rolesprivquery' name="rolename" placeholder="Role Name" required></td>
+              </tr>
+              <tr>
+                <td></td><td><input type='submit'  value='Find' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+
+     <div class="row">
+        <div class="col-md-5">
+          <form action="/accountprivuquery" method="post">
+              <p>Transaction 8. Print all the privileges related to a account</p>
+              <table class="table">
+              <tr>
+                <td>USER ACCOUNT ID</td><td><input type="text"  name="accntnum" placeholder="ACCNT ID" required></td>
+              </tr>
+              <tr>
+                <td></td><td><input type='submit'  value='Find' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+
+     <div class="row">
+        <div class="col-md-5">
+          <form action="/specificaccountprivuquery" method="post">
+              <p>Transaction 8. Check if account has privilege</p>
+              <table class="table">
+              <tr>
+                <td>USER ACCOUNT ID</td><td><input type="text"  name="accntnum" placeholder="ACCNT ID" required></td>
+              </tr>
+                   <tr>
+                <td>privilege</td><td><input type="text"  name="priv" placeholder="privilege" required></td>
+              </tr>
+              <tr>
+                <td></td><td><input type='submit'  value='Find' class='btn btn-primary btn-sm' required></td>
+              </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+
+    </div>
+</body>
+</html>
